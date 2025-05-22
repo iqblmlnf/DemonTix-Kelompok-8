@@ -1,47 +1,51 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+  <div>
+    <Navbar v-if="!isLoginPage" @search="handleSearch" @clear-search="clearResults" />
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+    <SearchResult v-if="searchQuery" :searchQuery="searchQuery" :events="filteredEvents" />
+    <router-view v-else />
+    
+    <Footer v-if="!isLoginPage" />
+  </div>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-}
+<script>
+import Navbar from "@/components/Navbar.vue";
+import Footer from "@/components/Footer.vue";
+import SearchResult from "@/components/SearchResult.vue";
+import { allEvents } from "@/data/events.js";
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+export default {
+  name: "App",
+  components: {
+    Navbar,
+    Footer,
+    SearchResult
+  },
+  data() {
+    return {
+      searchQuery: "",
+      events: allEvents
+    };
+  },
+  computed: {
+  filteredEvents() {
+    if (!this.searchQuery) return [];
+    return this.events.filter(event =>
+      event.title.toLowerCase().includes(this.searchQuery.toLowerCase())
+    );
+  },
+  isLoginPage() {
+    return this.$route.path === "/login";
   }
-
-  .logo {
-    margin: 0 2rem 0 0;
+},
+  methods: {
+    handleSearch(query) {
+      this.searchQuery = query;
+    },
+    clearResults() {
+      this.searchQuery = "";
+    }
   }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
-</style>
+};
+</script>
