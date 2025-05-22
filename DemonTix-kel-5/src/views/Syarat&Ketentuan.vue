@@ -206,6 +206,6 @@ h5 {
 
   .nav-pills {
     justify-content: center;
-  }
+  }
 }
 </style>

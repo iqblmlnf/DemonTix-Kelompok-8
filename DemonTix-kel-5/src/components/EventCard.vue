@@ -1,18 +1,18 @@
 <template>
-  <router-link
-    :to="/Detail/${event.id}"
-    class="card event-card text-decoration-none text-dark"
-    aria-label="Lihat detail untuk event {{ event.title }}"
-  >
-    <img
-      loading="lazy"
-      decoding="async"
-      :src="event.image"
-      :alt="Poster event ${event.title}"
-      class="card-img-top rounded-top-3 event-image"
-      width="224"
-      height="112"
-    />
+<router-link
+  :to="'/Detail/' + event.id"
+  class="card event-card text-decoration-none text-dark"
+  :aria-label="'Lihat detail untuk event ' + event.title"
+>
+     <img
+    loading="lazy"
+    decoding="async"
+    :src="event.image"
+    :alt="'Poster event ' + event.title"
+    class="card-img-top rounded-top-3 event-image"
+    width="224"
+    height="112"
+  />
 
     <div class="card-body d-flex flex-column event-body">
       <div class="fw-semibold small mb-1 lh-sm event-title">
