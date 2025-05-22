@@ -7,13 +7,13 @@
           <div class="accordion-item border-0 mb-3">
             <h2 class="accordion-header">
               <button class="accordion-button fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true">
-                Cara Pembelian Tiket di Artatix
+                Cara Pembelian Tiket di DemonTix
               </button>
             </h2>
             <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
               <div class="accordion-body">
                 <ul class="ps-3">
-                  <li>Pembeli memilih tiket event yang diinginkan, silahkan mengunjungi website artatix.co.id</li>
+                  <li>Pembeli memilih tiket event yang diinginkan, silahkan mengunjungi website DemonTix</li>
                   <li>Pilih event atau klik searching box dan tulis event yang ingin dibeli</li>
                   <li>Kemudian pilih tiket yang ingin dibeli</li>
                   <li>Selanjutnya mengisi data diri dan pastikan benar</li>

@@ -3,6 +3,7 @@ import Home from '@/views/Home.vue';
 import Jelajah from '@/views/Jelajah.vue';
 import SyaratKetentuan from '@/views/Syarat&Ketentuan.vue';
 import Faq from '@/views/Faq.vue';
+import Login from '@/views/Login.vue';
 
 
 
@@ -13,6 +14,7 @@ const routes = [
   { path: '/beli/:id', name: 'BeliTiket', component: () => import('@/views/BeliTiket.vue'), props: true},
   { path: '/syarat-ketentuan', name: 'SyaratKetentuan', component: SyaratKetentuan },
   { path: '/faq', name: 'Faq', component: Faq},
+  { path: '/login', name: 'Login', component: Login },
 ];
 
 const router = createRouter({

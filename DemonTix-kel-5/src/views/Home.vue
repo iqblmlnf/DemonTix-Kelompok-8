@@ -5,7 +5,7 @@
     <!-- Rekomendasi Event -->
     <section class="container-fluid my-4">
       <div class="d-flex justify-content-between align-items-center mb-3 border-bottom pb-2">
-        <h2 class="fs-5 fw-bold m-0">Rekomendasi Event sayaaaa</h2>
+        <h2 class="fs-5 fw-bold m-0">Rekomendasi Event</h2>
       </div>
       <div class="d-flex overflow-auto gap-4 pb-2">
         <EventCard

@@ -46,12 +46,10 @@ export default {
           content: `
             <ol>
               <li>Seluruh persetujuan “Konsumen”, “Kamu”, dan “Anda” menggantikan kamu...</li>
-              <li>Menyetujui syarat dan ketentuan perusahaan “ARTATIX”...</li>
+              <li>Menyetujui syarat dan ketentuan perusahaan “DemonTix”...</li>
               <li>“Member”, “Event Creator”, “Panitia”, dan “Mereka” menggantikan klien kami...</li>
               <li>“Pembeli” berarti setiap individu dan/atau badan hukum...</li>
-              <li>“Situs” berarti artatix.co.id...</li>
               <li>“Event” berarti sesuatu kegiatan yang bersifat komersial...</li>
-              <li>“Artatix.com” berarti adalah layanan...</li>
               <li>“Biaya Jasa” berarti biaya jasa sebagai imbalan...</li>
             </ol>
           `
@@ -63,7 +61,7 @@ export default {
               <li>Jika terjadi konflik atau inkonsistensi antara dua atau lebih ketentuan...</li>
               <li>Kesepakatan ini berlaku ketika kamu dan event creator menggunakan sistem kami...</li>
               <li>Selain ketentuan penggunaan ini dan tergantung pada layanan yang dipilih oleh kamu...</li>
-              <li>ARTATIX akan mengumumkan setiap perubahan melalui Platform...</li>
+              <li>DemonTix akan mengumumkan setiap perubahan melalui Platform...</li>
               <li>Seluruh pemesanan tiket oleh pembeli pada cara yang dibuat oleh event manager...</li>
             </ol>
           `

@@ -66,7 +66,7 @@ export const allEvents = [
     id: 4,
     title: "LAW SOEDIRMAN FUN RUN 2025",
     date: "2025-06-20",
-    location: "Fakultas Hukum UNSOED",
+    location: "FH UNSOED",
     price: [
       { nama: "Early bird", harga: 149000, stock: 0 },
       { nama: "Presale 1", harga: 179000, stock: 0 },
