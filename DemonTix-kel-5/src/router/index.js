@@ -5,6 +5,7 @@ import HubungiKami from '@/views/HubungiKami.vue'
 import SyaratKetentuan from '@/views/Syarat&Ketentuan.vue';
 import Faq from '@/views/Faq.vue';
 import Login from '@/views/Login.vue';
+import TeamProject from '@/views/TeamProject.vue';
 
 
 
@@ -17,6 +18,7 @@ const routes = [
   { path: '/syarat-ketentuan', name: 'SyaratKetentuan', component: SyaratKetentuan },
   { path: '/faq', name: 'Faq', component: Faq},
   { path: '/login', name: 'Login', component: Login },
+  { path: '/team-project', name: 'TeamProject', component: TeamProject },
 ];
 
 const router = createRouter({
