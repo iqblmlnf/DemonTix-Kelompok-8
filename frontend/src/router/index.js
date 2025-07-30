@@ -75,6 +75,12 @@ const routes = [
         props: true,
         meta: { requiresAdmin: true }
       },
+      {
+        path: 'tiket',
+        name: 'ListTiket',
+        component: () => import('@/views/admin/tiket/TicketList.vue'),
+        meta: { requiresAdmin: true }
+      },
     ]
   }
 ];
