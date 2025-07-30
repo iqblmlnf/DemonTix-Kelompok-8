@@ -17,7 +17,6 @@
               v-for="(event, index) in events"
               :key="index"
               :event="event"
-              class="marquee-card flex-shrink-0"
             />
           </div>
         </div>
@@ -54,11 +53,6 @@ defineProps({
   gap: 1rem;
   width: max-content;
   animation: marquee 20s linear infinite;
-}
-
-.marquee-card {
-  width: 11rem;
-  min-width: 11rem;
 }
 
 .marquee-card img {
