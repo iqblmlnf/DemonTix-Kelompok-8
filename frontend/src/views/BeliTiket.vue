@@ -7,26 +7,21 @@
           <!-- Data Pemesan -->
           <section class="card border-0 shadow-sm mb-4 rounded-4 p-4 bg-white">
             <h3 class="fw-bold mb-4">Data Pemesan</h3>
-            <form class="row g-3">
+            <form class="row g-3" @submit.prevent>
               <div class="col-12">
-                <label for="nama" class="form-label fw-semibold"
-                  >Nama Lengkap</label
-                >
+                <label for="nama" class="form-label fw-semibold">Nama Lengkap</label>
                 <input
                   id="nama"
                   v-model="dataPemesan.nama"
                   type="text"
                   class="form-control"
-                  placeholder="Marcus Holloway"
                   :aria-invalid="!dataPemesan.nama ? 'true' : 'false'"
                   aria-describedby="namaError"
                 />
               </div>
 
               <div class="col-md-6">
-                <label for="jenisIdentitas" class="form-label fw-semibold"
-                  >Jenis Identitas</label
-                >
+                <label for="jenisIdentitas" class="form-label fw-semibold">Jenis Identitas</label>
                 <select
                   id="jenisIdentitas"
                   v-model="dataPemesan.jenisIdentitas"
@@ -37,17 +32,14 @@
                   <option>SIM</option>
                 </select>
               </div>
-              
+
               <div class="col-md-6">
-                <label for="nomorIdentitas" class="form-label fw-semibold"
-                  >Nomor Identitas</label
-                >
+                <label for="nomorIdentitas" class="form-label fw-semibold">Nomor Identitas</label>
                 <input
                   id="nomorIdentitas"
                   v-model="dataPemesan.nomorIdentitas"
                   type="text"
                   class="form-control"
-                  placeholder="1234567890"
                 />
               </div>
               <div class="col-12 d-flex gap-3">
@@ -60,9 +52,7 @@
                     value="Laki-laki"
                     v-model="dataPemesan.gender"
                   />
-                  <label for="genderLaki" class="form-check-label"
-                    >Laki-laki</label
-                  >
+                  <label for="genderLaki" class="form-check-label">Laki-laki</label>
                 </div>
                 <div class="form-check">
                   <input
@@ -73,36 +63,20 @@
                     value="Perempuan"
                     v-model="dataPemesan.gender"
                   />
-                  <label for="genderPerempuan" class="form-check-label"
-                    >Perempuan</label
-                  >
+                  <label for="genderPerempuan" class="form-check-label">Perempuan</label>
                 </div>
               </div>
               <div class="col-md-6">
                 <label class="form-label fw-semibold">Usia</label>
-                <input
-                  v-model="dataPemesan.usia"
-                  type="number"
-                  class="form-control"
-                />
+                <input v-model="dataPemesan.usia" type="number" class="form-control" />
               </div>
               <div class="col-md-6">
                 <label class="form-label fw-semibold">Email</label>
-                <input
-                  v-model="dataPemesan.email"
-                  type="email"
-                  class="form-control"
-                  placeholder="nama@email.com"
-                />
+                <input v-model="dataPemesan.email" type="email" class="form-control" />
               </div>
               <div class="col-12">
                 <label class="form-label fw-semibold">No WhatsApp</label>
-                <input
-                  v-model="dataPemesan.whatsapp"
-                  type="text"
-                  class="form-control"
-                  placeholder="08xxxxxxxxxx"
-                />
+                <input v-model="dataPemesan.whatsapp" type="text" class="form-control" />
               </div>
             </form>
           </section>
@@ -110,32 +84,21 @@
           <!-- Data Pemilik Tiket -->
           <section class="mb-4">
             <h3 class="fw-bold mb-3">Data Pemilik Tiket</h3>
-
             <div
               class="card border-0 shadow-sm rounded-4 p-4 bg-white mb-4"
               v-for="(pemilik, index) in pemilikTiketList"
               :key="index"
             >
-              <div
-                class="d-flex justify-content-between align-items-center mb-3"
-              >
+              <div class="d-flex justify-content-between align-items-center mb-3">
                 <h5 class="fw-semibold mb-0">Pemilik Tiket {{ index + 1 }}</h5>
-                <span
-                  class="text-primary small cursor-pointer fw-semibold"
-                  @click="samakanSatuPemilik(index)"
-                >
+                <span class="text-primary small cursor-pointer fw-semibold" @click="samakanSatuPemilik(index)">
                   Samakan dengan data pemesan
                 </span>
               </div>
               <form class="row g-3">
                 <div class="col-12">
                   <label class="form-label fw-semibold">Nama Lengkap</label>
-                  <input
-                    v-model="pemilik.nama"
-                    type="text"
-                    class="form-control"
-                    placeholder="Marcus Holloway"
-                  />
+                  <input v-model="pemilik.nama" type="text" class="form-control" />
                 </div>
                 <div class="col-md-6">
                   <label class="form-label fw-semibold">Jenis Identitas</label>
@@ -147,12 +110,7 @@
                 </div>
                 <div class="col-md-6">
                   <label class="form-label fw-semibold">Nomor Identitas</label>
-                  <input
-                    v-model="pemilik.nomorIdentitas"
-                    type="text"
-                    class="form-control"
-                    placeholder="1234567890"
-                  />
+                  <input v-model="pemilik.nomorIdentitas" type="text" class="form-control" />
                 </div>
                 <div class="col-12 d-flex gap-3">
                   <div class="form-check">
@@ -178,27 +136,15 @@
                 </div>
                 <div class="col-md-6">
                   <label class="form-label fw-semibold">Usia</label>
-                  <input
-                    v-model="pemilik.usia"
-                    type="number"
-                    class="form-control"
-                  />
+                  <input v-model="pemilik.usia" type="number" class="form-control" />
                 </div>
                 <div class="col-md-6">
                   <label class="form-label fw-semibold">Email</label>
-                  <input
-                    v-model="pemilik.email"
-                    type="email"
-                    class="form-control"
-                  />
+                  <input v-model="pemilik.email" type="email" class="form-control" />
                 </div>
                 <div class="col-12">
                   <label class="form-label fw-semibold">No WhatsApp</label>
-                  <input
-                    v-model="pemilik.whatsapp"
-                    type="text"
-                    class="form-control"
-                  />
+                  <input v-model="pemilik.whatsapp" type="text" class="form-control" />
                 </div>
               </form>
             </div>
@@ -207,26 +153,16 @@
 
         <!-- Rincian Pesanan -->
         <div class="col-lg-4">
-          <div
-            class="card shadow-sm rounded-4 p-4 bg-white sticky-top"
-            style="top: 100px"
-          >
+          <div class="card shadow-sm rounded-4 p-4 bg-white sticky-top" style="top: 100px">
             <h4 class="fw-bold mb-4">
-              <i class="fa-solid fa-circle-info me-2 text-danger"></i> Rincian
-              Pesanan
+              <i class="fa-solid fa-circle-info me-2 text-danger"></i> Rincian Pesanan
             </h4>
             <div v-if="event" class="mb-3">
-              <img
-                :src="event.image"
-                alt="banner"
-                class="img-fluid rounded-3 mb-3"
-                style="height: 140px; object-fit: cover"
-              />
+              <img :src="event.image" alt="banner" class="img-fluid rounded-3 mb-3" style="height: 140px; object-fit: cover" />
               <h6 class="fw-semibold mb-0">{{ event.title }}</h6>
-              <small class="text-muted"
-                >{{ new Date(event.date).toLocaleDateString("id-ID") }} -
-                {{ event.location }}</small
-              >
+              <small class="text-muted">
+                {{ new Date(event.date).toLocaleDateString("id-ID") }} - {{ event.location }}
+              </small>
             </div>
             <div
               v-for="(item, idx) in selectedTickets"
@@ -235,39 +171,35 @@
             >
               <div>
                 <p class="mb-0 fw-semibold">{{ item.nama }}</p>
-                <p class="mb-0 text-muted">
-                  Rp {{ item.harga.toLocaleString("id-ID") }}
-                </p>
+                <p class="mb-0 text-muted">Rp {{ formatRupiah(item.harga) }}</p>
               </div>
               <p class="mb-0 fw-semibold">x{{ item.qty }}</p>
             </div>
+
             <div class="small mb-3">
               <div class="d-flex justify-content-between">
                 <span>Subtotal</span>
-                <span class="fw-medium"
-                  >Rp {{ subtotal.toLocaleString("id-ID") }}</span
-                >
+                <span class="fw-medium">Rp {{ subtotal.toLocaleString("id-ID") }}</span>
               </div>
               <div class="d-flex justify-content-between">
                 <span>Biaya Layanan</span>
-                <span class="fw-medium"
-                  >Rp {{ layanan.toLocaleString("id-ID") }}</span
-                >
+                <span class="fw-medium">Rp {{ layanan.toLocaleString("id-ID") }}</span>
               </div>
-              <div
-                class="border-top pt-2 mt-2 d-flex justify-content-between fw-bold text-danger"
-              >
+              <div class="border-top pt-2 mt-2 d-flex justify-content-between fw-bold text-danger">
                 <span>Total</span>
                 <span>Rp {{ total.toLocaleString("id-ID") }}</span>
               </div>
             </div>
+
             <div v-if="!formValid" class="text-danger small mb-2">
               ⚠ Harap lengkapi data terlebih dahulu.
             </div>
+
             <button
               class="btn btn-danger w-100 fw-semibold"
               :disabled="!formValid"
               :class="{ 'opacity-50': !formValid }"
+              @click="submitPemesanan"
             >
               Lanjutkan Pembayaran
             </button>
@@ -279,7 +211,8 @@
 </template>
 
 <script>
-import { allEvents } from "@/data/events";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 export default {
   name: "BeliTiket",
@@ -298,14 +231,19 @@ export default {
         email: "",
         whatsapp: "",
       },
+      loading: false,
     };
   },
   computed: {
-    subtotal() {
-      return this.selectedTickets.reduce(
-        (sum, item) => sum + item.harga * item.qty,
-        0
+    formValid() {
+      const isPemesanLengkap = Object.values(this.dataPemesan).every((val) => val !== "");
+      const isPemilikLengkap = this.pemilikTiketList.every((pemilik) =>
+        Object.values(pemilik).every((val) => val !== "")
       );
+      return isPemesanLengkap && isPemilikLengkap;
+    },
+    subtotal() {
+      return this.selectedTickets.reduce((sum, item) => sum + item.harga * item.qty, 0);
     },
     layanan() {
       return 11000;
@@ -313,22 +251,10 @@ export default {
     total() {
       return this.subtotal + this.layanan;
     },
-    formValid() {
-      const isPemesanLengkap = Object.values(this.dataPemesan).every(
-        (val) => val !== ""
-      );
-      const semuaPemilikLengkap = this.pemilikTiketList.every((pemilik) =>
-        Object.values(pemilik).every((val) => val !== "")
-      );
-      return isPemesanLengkap && semuaPemilikLengkap;
-    },
   },
   methods: {
     generatePemilikTiketForm() {
-      const totalQty = this.selectedTickets.reduce(
-        (sum, item) => sum + item.qty,
-        0
-      );
+      const totalQty = this.selectedTickets.reduce((sum, item) => sum + item.qty, 0);
       this.pemilikTiketList = Array.from({ length: totalQty }, () => ({
         nama: "",
         jenisIdentitas: "",
@@ -339,20 +265,67 @@ export default {
         whatsapp: "",
       }));
     },
+    formatRupiah(val) {
+      if (!val) return "Rp 0";
+      return new Intl.NumberFormat("id-ID", {
+        style: "currency",
+        currency: "IDR",
+        minimumFractionDigits: 0,
+      }).format(val);
+    },
     samakanSatuPemilik(index) {
       const pemesan = this.dataPemesan;
       const pemilik = this.pemilikTiketList[index];
       Object.assign(pemilik, { ...pemesan });
     },
+    async submitPemesanan() {
+      this.loading = true;
+      try {
+        const payload = {
+          pemesan: this.dataPemesan,
+          pemilik_tiket: this.pemilikTiketList,
+          tiket: this.selectedTickets,
+          event_id: this.event.id,
+          subtotal: this.subtotal,
+          total: this.total,
+        };
+
+        const response = await axios.post("http://localhost:8000/api/pemesanan", payload);
+        const id = response.data.id;
+
+        // Alert sukses sebelum redirect
+        await Swal.fire({
+          icon: "success",
+          title: "Pemesanan Berhasil",
+          text: "Silakan lanjut ke pembayaran.",
+          timer: 1800,
+          showConfirmButton: false,
+        });
+
+        this.$router.push(`/pembayaran/${id}`);
+      } catch (error) {
+        console.error("Gagal kirim pemesanan:", error);
+        Swal.fire({
+          icon: "error",
+          title: "Gagal",
+          text: "Terjadi kesalahan saat mengirim data pemesanan.",
+        });
+      } finally {
+        this.loading = false;
+      }
+    },
   },
   mounted() {
     const eventId = parseInt(this.id);
-    this.event = allEvents.find((e) => e.id === eventId);
+    axios.get(`http://localhost:8000/api/events/${eventId}`).then((response) => {
+      this.event = response.data;
+    });
 
     const queryTiket = this.$route.query.tiket;
     if (queryTiket) {
       try {
-        this.selectedTickets = JSON.parse(queryTiket);
+        const decoded = decodeURIComponent(decodeURIComponent(decodeURIComponent(queryTiket)));
+        this.selectedTickets = JSON.parse(decoded);
         this.generatePemilikTiketForm();
       } catch (err) {
         console.error("Gagal parsing tiket:", err);

@@ -1,22 +1,33 @@
-// Jelajah.vue (Fully Optimized for Performance 90+)
 <template>
   <div class="bg-white text-dark">
-    <main class="container-fluid my-4">
+    <main class="container my-4">
       <!-- Header Filter -->
       <div class="header-filter mb-4 d-flex flex-wrap gap-2 align-items-center">
         <h1 class="title fs-3 mb-2 me-auto">Jelajah Event</h1>
-        <select v-model="selectedCategory" class="form-select" aria-label="Pilih kategori acara">
+        <select
+          v-model="selectedCategory"
+          class="form-select"
+          aria-label="Pilih kategori acara"
+        >
           <option value="">Kategori</option>
           <option>Musik</option>
           <option>Olahraga</option>
           <option>Wisata</option>
         </select>
-        <select v-model="selectedTime" class="form-select" aria-label="Pilih waktu acara">
+        <select
+          v-model="selectedTime"
+          class="form-select"
+          aria-label="Pilih waktu acara"
+        >
           <option value="">Waktu</option>
           <option>Minggu Ini</option>
           <option>Bulan Ini</option>
         </select>
-        <select v-model="selectedSort" class="form-select" aria-label="Pilih urutan acara">
+        <select
+          v-model="selectedSort"
+          class="form-select"
+          aria-label="Pilih urutan acara"
+        >
           <option value="">Urutkan</option>
           <option value="asc">Harga Terendah</option>
           <option value="desc">Harga Tertinggi</option>
@@ -24,20 +35,26 @@
       </div>
 
       <!-- Event Cards -->
-      <div class="d-flex flex-wrap gap-3 justify-content-start">
-        <EventCard
+      <div class="row">
+        <div
           v-for="event in paginatedEvents"
           :key="event.id"
-          :event="event"
-          v-memo="[event.id]"
-        />
+          class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3"
+        >
+          <EventCard :event="event" v-memo="[event.id]" />
+        </div>
       </div>
 
       <!-- Pagination -->
-      <nav v-if="pageCount > 1" class="pagination-nav mt-4 d-flex justify-content-center">
+      <nav
+        v-if="pageCount > 1"
+        class="pagination-nav mt-4 d-flex justify-content-center"
+      >
         <ul class="pagination">
           <li class="page-item" :class="{ disabled: currentPage === 1 }">
-            <button class="page-link" @click="changePage(currentPage - 1)">«</button>
+            <button class="page-link" @click="changePage(currentPage - 1)">
+              «
+            </button>
           </li>
           <li
             v-for="page in pageCount"
@@ -45,10 +62,17 @@
             class="page-item"
             :class="{ active: page === currentPage }"
           >
-            <button class="page-link" @click="changePage(page)">{{ page }}</button>
+            <button class="page-link" @click="changePage(page)">
+              {{ page }}
+            </button>
           </li>
-          <li class="page-item" :class="{ disabled: currentPage === pageCount }">
-            <button class="page-link" @click="changePage(currentPage + 1)">»</button>
+          <li
+            class="page-item"
+            :class="{ disabled: currentPage === pageCount }"
+          >
+            <button class="page-link" @click="changePage(currentPage + 1)">
+              »
+            </button>
           </li>
         </ul>
       </nav>
@@ -58,7 +82,7 @@
 
 <script>
 import EventCard from "@/components/EventCard.vue";
-import { allEvents } from "@/data/events.js";
+import axios from "axios";
 
 export default {
   name: "Jelajah",
@@ -68,7 +92,7 @@ export default {
       selectedCategory: "",
       selectedTime: "",
       selectedSort: "",
-      events: allEvents,
+      events: [],
       currentPage: 1,
       itemsPerPage: 4,
     };
@@ -78,9 +102,16 @@ export default {
       const now = new Date();
       let result = this.events;
 
+      // Filter kategori (case insensitive)
       if (this.selectedCategory) {
-        result = result.filter((e) => e.category === this.selectedCategory);
+        result = result.filter(
+          (e) =>
+            (e.category || "").toLowerCase() ===
+            this.selectedCategory.toLowerCase()
+        );
       }
+
+      // Filter waktu
       if (this.selectedTime) {
         result = result.filter((e) => {
           const eventDate = new Date(e.date);
@@ -89,15 +120,24 @@ export default {
             end.setDate(now.getDate() + 7);
             return eventDate >= now && eventDate <= end;
           } else if (this.selectedTime === "Bulan Ini") {
-            return eventDate.getMonth() === now.getMonth() && eventDate.getFullYear() === now.getFullYear();
+            return (
+              eventDate.getMonth() === now.getMonth() &&
+              eventDate.getFullYear() === now.getFullYear()
+            );
           }
           return true;
         });
       }
+
+      // Urutkan harga
       if (this.selectedSort === "asc") {
-        result = [...result].sort((a, b) => a.price - b.price);
+        result = [...result].sort(
+          (a, b) => getMinPrice(a.tickets) - getMinPrice(b.tickets)
+        );
       } else if (this.selectedSort === "desc") {
-        result = [...result].sort((a, b) => b.price - a.price);
+        result = [...result].sort(
+          (a, b) => getMinPrice(b.tickets) - getMinPrice(a.tickets)
+        );
       }
 
       return result;
@@ -111,6 +151,9 @@ export default {
     },
   },
   watch: {
+    "$route.query.kategori"(newKategori) {
+      this.selectedCategory = newKategori || "";
+    },
     selectedCategory() {
       this.currentPage = 1;
     },
@@ -128,8 +171,45 @@ export default {
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
     },
+    fetchEvents() {
+      axios
+        .get("http://127.0.0.1:8000/api/events")
+        .then((res) => {
+          if (Array.isArray(res.data)) {
+            this.events = res.data;
+          } else if (Array.isArray(res.data.data)) {
+            this.events = res.data.data;
+          } else {
+            console.error("Format data dari API tidak sesuai:", res.data);
+            this.events = [];
+          }
+        })
+        .catch((err) => {
+          console.error("Gagal memuat event:", err);
+          this.events = [];
+        });
+    },
+  },
+  mounted() {
+    this.fetchEvents();
+
+    // Set kategori awal dari query
+    const kategoriFromQuery = this.$route.query.kategori;
+    if (kategoriFromQuery) {
+      this.selectedCategory = kategoriFromQuery;
+    }
   },
 };
+
+// Helper: ambil harga minimum dari tiket
+function getMinPrice(tickets) {
+  if (!Array.isArray(tickets)) return Infinity;
+  const available = tickets.filter(
+    (t) => t.stock > 0 && typeof t.harga === "number"
+  );
+  if (available.length === 0) return Infinity;
+  return Math.min(...available.map((t) => t.harga));
+}
 </script>
 
 <style scoped>
