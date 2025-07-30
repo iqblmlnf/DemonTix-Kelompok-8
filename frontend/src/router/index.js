@@ -107,7 +107,12 @@ const routes = [
         props: true,
         meta: { requiresAdmin: true }
       },
-      
+      {
+        path: 'contact',
+        name: 'ContactList',
+        component: () => import('@/views/admin/contacts/ContactList.vue'),
+        meta: { requiresAdmin: true }
+      }
     ]
   }
 ];
