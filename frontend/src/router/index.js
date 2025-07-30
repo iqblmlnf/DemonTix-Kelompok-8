@@ -37,6 +37,25 @@ const routes = [
         component: () => import('@/views/admin/Dashboard.vue'),
         meta: { requiresAdmin: true }
       },
+      {
+        path: 'users',
+        name: 'UserList',
+        component: () => import('@/views/admin/users/UserList.vue'),
+        meta: { requiresAdmin: true }
+      },
+      {
+        path: 'users/create',
+        name: 'UserCreate',
+        component: () => import('@/views/admin/users/UserCreate.vue'),
+        meta: { requiresAdmin: true }
+      },
+      {
+        path: 'users/edit/:id',
+        name: 'UserEdit',
+        component: () => import('@/views/admin/users/UserEdit.vue'),
+        props: true,
+        meta: { requiresAdmin: true }
+      },
     ]
   }
 ];
