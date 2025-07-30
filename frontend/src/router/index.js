@@ -19,6 +19,8 @@ const routes = [
   { path: '/faq', name: 'Faq', component: Faq},
   { path: '/login', name: 'Login', component: Login },
   { path: '/team-project', name: 'TeamProject', component: TeamProject },
+
+  
 ];
 
 const router = createRouter({
