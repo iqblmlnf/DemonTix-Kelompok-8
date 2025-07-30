@@ -26,6 +26,19 @@ const routes = [
     component: () => import('@/views/Search.vue'),
     props: route => ({ query: route.query.q })
   },
+
+  {
+    path: '/admin',
+    component: () => import('@/views/AdminDashboard.vue'),
+    children: [
+      {
+        path: '',
+        name: 'AdminHome',
+        component: () => import('@/views/admin/Dashboard.vue'),
+        meta: { requiresAdmin: true }
+      },
+    ]
+  }
 ];
 
 const router = createRouter({
