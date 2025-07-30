@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Http\Controllers\API\UserController;
+use App\Http\Controllers\API\EventController;
 use App\Http\Controllers\API\ContactController;
 use App\Http\Controllers\DashboardController;
 
@@ -63,3 +64,13 @@ Route::delete('/users/{id}', [UserController::class, 'destroy']);
 // CONTACT (HUBUNGI KAMI)
 // ===========================
 Route::apiResource('contact', ContactController::class)->only(['index', 'store', 'destroy']);
+
+// ===========================
+// EVENT CRUD
+// ===========================
+Route::get('/events', [EventController::class, 'index']);
+Route::get('/events/{id}', [EventController::class, 'show']);
+Route::post('/events', [EventController::class, 'store']);
+Route::put('/events/{id}', [EventController::class, 'update']);
+Route::delete('/events/{id}', [EventController::class, 'destroy']);
+
