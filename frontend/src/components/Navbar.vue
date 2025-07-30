@@ -3,7 +3,7 @@
     <div class="container-fluid px-4">
       <div class="row align-items-center">
         <!-- Logo -->
-        <div class="col-4 col-md-3 d-flex align-items-center">
+        <div class="col-6 col-md-3 d-flex align-items-center">
           <router-link
             to="/"
             class="d-flex align-items-center gap-2 text-white text-decoration-none"
@@ -18,56 +18,38 @@
           </router-link>
         </div>
 
-        <!-- Nav -->
+        <!-- Burger Button -->
+        <div class="col-6 d-md-none text-end">
+          <button
+            @click="toggleMenu"
+            class="btn btn-outline-light btn-sm"
+            aria-label="Toggle menu navigasi"
+          >
+            ☰
+          </button>
+        </div>
+
+        <!-- Nav Desktop -->
         <nav
-          class="col-4 d-none d-md-flex justify-content-center"
+          class="col-12 col-md-5 mt-3 mt-md-0 d-none d-md-flex justify-content-center"
           role="navigation"
           aria-label="Menu utama"
         >
           <ul class="nav gap-3">
-            <li class="nav-item">
+            <li class="nav-item" v-for="item in menu" :key="item.label">
               <router-link
-                :to="{ name: 'Home' }"
-                aria-label="Beranda kami"
+                :to="item.to"
+                :aria-label="item.label"
                 class="nav-link text-white fw-semibold px-2 hover-underline"
               >
-                Home
-              </router-link>
-            </li>
-            <li class="nav-item">
-              <router-link
-                to="/jelajah"
-                aria-label="Jelajahi event atau kategori"
-                class="nav-link text-white fw-semibold px-2 hover-underline"
-              >
-                Jelajah
-              </router-link>
-            </li>
-            <li class="nav-item">
-              <router-link
-                to="/team-project"
-                aria-label="Tim proyek kami"
-                class="nav-link text-white fw-semibold px-2 hover-underline"
-              >
-                Team Project
-              </router-link>
-            </li>
-            <li class="nav-item">
-              <router-link
-                to="/hubungi-kami"
-                aria-label="Hubungi kami untuk informasi lebih lanjut"
-                class="nav-link text-white fw-semibold px-2 hover-underline"
-              >
-                Hubungi Kami
+                {{ item.label }}
               </router-link>
             </li>
           </ul>
         </nav>
 
-        <!-- Search -->
-        <div
-          class="col-8 col-md-5 d-flex justify-content-end align-items-center gap-2"
-        >
+        <!-- Search + Auth (Desktop) -->
+        <div class="col-md-4 d-none d-md-flex justify-content-end align-items-center gap-2">
           <input
             type="text"
             v-model="searchTerm"
@@ -75,12 +57,62 @@
             placeholder="Cari event..."
             class="form-control form-control-sm rounded-pill w-50"
             aria-label="Cari event"
-            id="search-input"
           />
+          <div v-if="user" class="d-flex align-items-center gap-2">
+            <span class="text-white fw-semibold">{{ user.name }}</span>
+            <button
+              @click="logout"
+              class="btn btn-outline-light btn-sm rounded-pill fw-semibold"
+            >
+              Logout
+            </button>
+          </div>
           <router-link
+            v-else
             to="/login"
             class="btn btn-light btn-sm rounded-pill fw-semibold px-3"
             aria-label="Masuk ke akun Anda"
+          >
+            Login
+          </router-link>
+        </div>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div v-if="menuOpen" class="d-md-none mt-3">
+        <ul class="nav flex-column gap-2">
+          <li v-for="item in menu" :key="item.label" class="nav-item">
+            <router-link
+              :to="item.to"
+              class="nav-link text-white fw-semibold"
+              @click="toggleMenu"
+            >
+              {{ item.label }}
+            </router-link>
+          </li>
+        </ul>
+        <div class="mt-3">
+          <input
+            type="text"
+            v-model="searchTerm"
+            @keyup.enter="emitSearch"
+            placeholder="Cari event..."
+            class="form-control form-control-sm rounded-pill"
+            aria-label="Cari event"
+          />
+          <div v-if="user" class="d-flex align-items-center justify-content-between mt-2">
+            <span class="text-white fw-semibold">{{ user.name }}</span>
+            <button
+              @click="logout"
+              class="btn btn-outline-light btn-sm rounded-pill fw-semibold"
+            >
+              Logout
+            </button>
+          </div>
+          <router-link
+            v-else
+            to="/login"
+            class="btn btn-light btn-sm rounded-pill fw-semibold mt-2"
           >
             Login
           </router-link>
@@ -96,7 +128,21 @@ export default {
   data() {
     return {
       searchTerm: "",
+      user: null,
+      menuOpen: false,
+      menu: [
+        { label: "Home", to: { name: "Home" } },
+        { label: "Jelajah", to: "/jelajah" },
+        { label: "Team Project", to: "/team-project" },
+        { label: "Hubungi Kami", to: "/hubungi-kami" },
+      ],
     };
+  },
+  created() {
+    const savedUser = localStorage.getItem("user");
+    if (savedUser) {
+      this.user = JSON.parse(savedUser);
+    }
   },
   watch: {
     searchTerm(newVal) {
@@ -109,10 +155,18 @@ export default {
     emitSearch() {
       const trimmed = this.searchTerm.trim();
       if (trimmed !== "") {
-        this.$emit("search", trimmed);
-      } else {
-        this.$emit("clear-search");
+        this.$router.push({ name: "Search", query: { q: trimmed } });
+        this.menuOpen = false;
       }
+    },
+    logout() {
+      localStorage.removeItem("user");
+      this.user = null;
+      this.$router.push("/login");
+      this.menuOpen = false;
+    },
+    toggleMenu() {
+      this.menuOpen = !this.menuOpen;
     },
   },
 };
@@ -129,6 +183,6 @@ header {
 
 button:focus,
 input:focus {
-  outline: 3px solid #f0ad4e; /* Fokus dengan border oranye */
+  outline: 3px solid #f0ad4e;
 }
 </style>
