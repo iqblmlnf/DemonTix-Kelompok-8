@@ -100,6 +100,13 @@ const routes = [
         component: () => import('@/views/admin/pemesanan/PemesananList.vue'),
         meta: { requiresAdmin: true }
       },
+      {
+        path: 'pemesanan/edit/:id',
+        name: 'PemesananEdit',
+        component: () => import('@/views/admin/pemesanan/PemesananEdit.vue'),
+        props: true,
+        meta: { requiresAdmin: true }
+      },
       
     ]
   }
