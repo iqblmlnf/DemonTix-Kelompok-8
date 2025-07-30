@@ -56,6 +56,25 @@ const routes = [
         props: true,
         meta: { requiresAdmin: true }
       },
+      {
+        path: 'events',
+        name: 'EventList',
+        component: () => import('@/views/admin/events/EventList.vue'),
+        meta: { requiresAdmin: true }
+      },
+      {
+        path: 'events/create',
+        name: 'EventCreate',
+        component: () => import('@/views/admin/events/EventCreate.vue'),
+        meta: { requiresAdmin: true }
+      },
+      {
+        path: 'events/edit/:id',
+        name: 'EventEdit',
+        component: () => import('@/views/admin/events/EventEdit.vue'),
+        props: true,
+        meta: { requiresAdmin: true }
+      },
     ]
   }
 ];
