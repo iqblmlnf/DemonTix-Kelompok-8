@@ -8,6 +8,7 @@ use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\EventController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\API\ContactController;
+use App\Http\Controllers\PemesananController;
 use App\Http\Controllers\DashboardController;
 
 // ===========================
@@ -89,3 +90,19 @@ Route::prefix('tickets')->group(function () {
     Route::put('/{ticket}', [TicketController::class, 'update']);
     Route::delete('/{ticket}', [TicketController::class, 'destroy']);
 });
+
+// ===========================
+// PEMESANAN
+// ===========================
+// Admin (lihat, edit, hapus)
+Route::get('/admin/pemesanan', [PemesananController::class, 'index']);
+Route::put('/admin/pemesanan/{id}', [PemesananController::class, 'update']);
+Route::get('/admin/pemesanan/{id}', [PemesananController::class, 'show']);
+Route::delete('/admin/pemesanan/{id}', [PemesananController::class, 'destroy']);
+
+// User
+Route::post('/pemesanan', [PemesananController::class, 'store']);
+Route::get('/pemesanan/{id}', [PemesananController::class, 'show']);
+
+// Auto-batal saat waktu habis
+Route::post('/pemesanan/batalkan', [PemesananController::class, 'batalkan']);
