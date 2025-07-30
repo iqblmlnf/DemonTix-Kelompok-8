@@ -20,7 +20,12 @@ const routes = [
   { path: '/login', name: 'Login', component: Login },
   { path: '/team-project', name: 'TeamProject', component: TeamProject },
 
-  
+    {
+    path: '/search',
+    name: 'Search',
+    component: () => import('@/views/Search.vue'),
+    props: route => ({ query: route.query.q })
+  },
 ];
 
 const router = createRouter({
