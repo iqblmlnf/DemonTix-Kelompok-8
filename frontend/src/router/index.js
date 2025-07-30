@@ -94,6 +94,12 @@ const routes = [
         props: true,
         meta: { requiresAdmin: true }
       },
+      {
+        path: 'pemesanan',
+        name: 'PemesananList',
+        component: () => import('@/views/admin/pemesanan/PemesananList.vue'),
+        meta: { requiresAdmin: true }
+      },
       
     ]
   }
