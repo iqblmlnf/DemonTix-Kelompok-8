@@ -87,6 +87,14 @@ const routes = [
         component: () => import('@/views/admin/tiket/CreateTicket.vue'),
         meta: { requiresAdmin: true }
       },
+      {
+        path: 'tiket/edit/:id',
+        name: 'EditTiket',
+        component: () => import('@/views/admin/tiket/EditTicket.vue'),
+        props: true,
+        meta: { requiresAdmin: true }
+      },
+      
     ]
   }
 ];
