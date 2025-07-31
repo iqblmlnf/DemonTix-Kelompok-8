@@ -111,7 +111,7 @@ storage/app/public/events/
 ## 👨‍💻 Developer
 
 Kelompok 8 - Mata Kuliah Pemrograman Web  
-Fakultas Teknologi Informasi, Universitas [Nama Kamu]
+Fakultas Ilmu Komputer, Universitas Amikom Yogyakarta
 
 ---
 
